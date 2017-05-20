@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新增</title>
+<script src="scriptaculous/lib/prototype.js" type="text/javascript"></script>
+<script src="scriptaculous/src/effects.js" type="text/javascript"></script>
+<script type="text/javascript" src="validation.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+<!--
+// Alternative Style: Working With Alternate Style Sheets
+// http://www.alistapart.com/articles/alternate/
+function setActiveStyleSheet(title) {
+var i, a, main;
+for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+a.disabled = true;
+if(a.getAttribute("title") == title) a.disabled = false;
+}
+}
+}
+//-->
+//]]>
+</script>
+<link title="style1" rel="stylesheet" href="style.css" type="text/css" />
+<link title="style2" rel="alternate stylesheet" href="style2.css" type="text/css" />
+<link title="style3" rel="alternate stylesheet" href="style3.css" type="text/css" />
+</head>
+<body>
+    <div class="style_changer" >
+    	<div class="style_changer_text">主题切换</div>
+        <input  style="background-color:yellow"  type="submit" value="深秋黄叶" onclick="setActiveStyleSheet('style2');" />
+        <input  style="background-color:white"  type="submit" value="白色格子" onclick="setActiveStyleSheet('style1');" />
+        <input  style="background-color:brown" type="submit" value="棕色木纹" onclick="setActiveStyleSheet('style3');" />
+        </br>
+
+    </div>
+
+  <div class="cities" align="center"  style="font-family:arial;">
+      
+    </div>
+
+	<div class="form_content">
+    <form id="test" action="#" method="get">
+    <fieldset>
+        <legend>新增策略</legend>
+   
+             <div class="form-row">
+            <div class="field-label"><label for="starcode">策略名称</label>:</div>
+            <div class="field-widget"><input name="starcode" id="starcode" class="required" title="请输入策略名称" /></div>
+         </div>
+ 
+
+        <div class="form-row">
+            <div class="field-label"><label for="starname">策略说明</label>:</div>
+            <div class="field-widget"><input name="starname" id="starname" class="required" title="请输入策略说明" /></div>
+         </div>
+
+ <div class="form-row">
+            <div class="field-label"><label for="cases">运行用例</label>:</div>
+            <div class="field-widget"><input name="cases" id="cases" class="required" title="请按执行顺序输入用例名称" /></div>
+         </div>
+
+
+      
+    </fieldset>
+  
+
+    <input type="submit" class="submit" value="提交" /> 
+    <input class="reset" type="button" value="重置" onclick="valid.reset(); return false" />
+
+
+    </form>
+    </div>
+    <script type="text/javascript">
+        function formCallback(result, form) {
+            window.status = "valiation callback for form '" + form.id + "': result = " + result;
+        }
+        
+        var valid = new Validation('test', {immediate : true, onFormValidate : formCallback});
+        Validation.addAllThese([
+            ['validate-password', '> 6 characters', {
+                minLength : 7,
+                notOneOf : ['password','PASSWORD','1234567','0123456'],
+                notEqualToField : 'field1'
+            }],
+            ['validate-password-confirm', 'please try again.', {
+                equalToField : 'field8'
+            }]
+        ]);
+    </script>
+
+</body>
+</html>

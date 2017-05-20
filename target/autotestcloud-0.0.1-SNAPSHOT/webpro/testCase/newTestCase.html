@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新增</title>
+<script src="../js/login/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="scriptaculous/lib/prototype.js" type="text/javascript"></script>
+<script src="scriptaculous/src/effects.js" type="text/javascript"></script>
+<script src="js/funtion.js" type="text/javascript"></script>
+<script src="js/jquery-1.11.0.js" type="text/javascript"></script>
+<script type="text/javascript" src="validation.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+<!--
+// Alternative Style: Working With Alternate Style Sheets
+// http://www.alistapart.com/articles/alternate/
+function setActiveStyleSheet(title) {
+var i, a, main;
+for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+a.disabled = true;
+if(a.getAttribute("title") == title) a.disabled = false;
+}
+}
+}
+//-->
+//]]>
+</script>
+<link title="style1" rel="stylesheet" href="style.css" type="text/css" />
+<link title="style2" rel="alternate stylesheet" href="style2.css" type="text/css" />
+<link title="style3" rel="alternate stylesheet" href="style3.css" type="text/css" />
+</head>
+<body >
+    <div class="style_changer" >
+    	
+        <input  style="background-color:yellow"  type="submit" value="深秋黄叶" onclick="setActiveStyleSheet('style2');" />
+        <input  style="background-color:white"  type="submit" value="白色格子" onclick="setActiveStyleSheet('style1');" />
+        <input  style="background-color:brown" type="submit" value="棕色木纹" onclick="setActiveStyleSheet('style3');" />
+        </br>
+
+    </div>
+
+<div  align="center" > 
+<!-- disabled="true" -->
+     <input type="button"  id ="bt1"  style="color:#FFFFFF;background-color:#8600FF;padding:4px 5px 2px 5px;cursor:pointer;border:none;" value="添加元素" onclick="AddField2();" /> 
+     <input type="button"  id ="bt11" style="color:#FFFFFF;background-color:#8600FF;padding:4px 5px 2px 5px;cursor:pointer;border:none;" value="取消元素" onclick="cancleField();" /> 
+
+     <input type="button"  id="bt2"   style="color:#FFFFFF;background-color:#FF8000;padding:4px 5px 2px 5px;cursor:pointer;border:none;"  value="添加功能" onclick="AddField();" /> 
+     <input type="button"  id="bt21" style="color:#FFFFFF;background-color:#FF8000;padding:4px 5px 2px 5px;cursor:pointer;border:none;"  value="取消功能" onclick="cancleField2();" /> 
+</div>
+  <div class="cities" align="center"  style="font-family:arial;">
+      
+    </div>
+
+	<div class="form_content">
+    <form id="test" action="#" method="get">
+     <div >
+    <!-- 字段名-->
+            <div class="field-label"><label for="testCase" ><b>用例名称</b></label>:</div>
+  <!-- 字段文本框 是否必填-->
+            <div class="field-widget"><input  name="testCase" id="testCase" class="required" placeholder="请先输入测试用例名称" title="请输入用例名称"/></div>
+        </div>
+
+    <fieldset id="fieldAdd2" style="display: none;">
+        <legend>元素属性</legend>
+
+
+        <div class="form-row">
+    <!-- 字段名-->
+            <div class="field-label"><label for="eleentcode" >操作步骤</label>:</div>
+  <!-- 字段文本框 是否必填-->
+            <div class="field-widget"><input name="eleentcode" id="userstep" onchange="checkedstep();" class="required" placeholder="请输入数字" title="请输入用例步骤"/>
+            </div>
+        </div>
+
+        <!--   <div class="form-row">
+            <div class="field-label"><label for="userstep">操作步骤</label>:</div>
+            <div class="field-label">
+            <input name="userstep" id="userstep"  readonly="true" class="optional"  />        
+            </div> -->
+
+        <div class="form-row">
+    <!-- 字段名-->
+            <div class="field-label"><label for="eleentcode" >元素标识</label>:</div>
+  <!-- 字段文本框 是否必填-->
+            <div class="field-widget"><input name="eleentcode" id="eleentcode" class="required" placeholder="btn_username" title="请输入元素标识" /></div>
+        </div>
+
+
+        <div class="form-row">
+            
+              <label>测试平台: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+              <label><input id="android" name="Fruit" type="checkbox" value="1"  onclick ="androidsel();"/>Android平台&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label> 
+              <label><input id="ios" name="Fruit" type="checkbox" value="1" onclick ="iossel();"/>Ios平台&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label> 
+              <label><input id="web" name="Fruit" type="checkbox" value="1" onclick ="websel();"/>Web平台</label> 
+              
+         </div> 
+      
+                
+                
+       
+         
+ <div id ="webforms" name="web定位" style="display: none;" > 
+        <div class="form-row">
+            <div class="field-label"><label for="locattype">Web定位方式</label>:</div>
+            <div class="field-widget">
+                <select id="Weblocattype" name="locattype" class="validate-selection" title="请选择定位方式">
+                    <option>请选择</option>
+                    <option>id</option>
+                    <option>xpath</option>
+                    <option>cssvalue</option>
+                    <option>classname</option>
+                    <option>dom</option>
+                    <option>ui</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field-label"><label for="locatstring">Web定位器</label>:</div>
+            <div class="field-widget"><input  placeholder="//android.widget.TextView[starts-with(@text,'用户名')]"  name="locatstring" id="locatstring1" class="required" title="请输入元素定位器" /></div>
+         </div>
+ </div>
+
+
+<div id ="androidforms" name="Android定位" style="display: none;" > 
+   <div class="form-row">
+            <div class="field-label"><label for="locattype">Android定位方式</label>:</div>
+            <div class="field-widget">
+                <select id="Androidlocattype" name="locattype" class="validate-selection" title="请选择定位方式">
+                    <option>请选择</option>
+                    <option>id</option>
+                    <option>xpath</option>
+                    <option>cssvalue</option>
+                    <option>classname</option>
+                    <option>dom</option>
+                    <option>ui</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field-label"><label for="locatstring">Android定位器</label>:</div>
+            <div class="field-widget"><input  placeholder="//android.widget.TextView[starts-with(@text,'用户名')]"  name="locatstring" id="locatstring2" class="required" title="请输入元素定位器" /></div>
+         </div>
+</div>
+
+
+
+ <div id ="iosforms" name="web定位" style="display: none;" > 
+     <div class="form-row">
+            <div class="field-label"><label for="locattype">Ios定位方式</label>:</div>
+            <div class="field-widget">
+                <select id="Ioslocattype" name="locattype" class="validate-selection" title="请选择定位方式">
+                    <option>请选择</option>
+                    <option>id</option>
+                    <option>xpath</option>
+                    <option>cssvalue</option>
+                    <option>classname</option>
+                    <option>dom</option>
+                    <option>ui</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field-label"><label for="locatstring">Ios定位器</label>:</div>
+            <div class="field-widget"><input  placeholder="//android.widget.TextView[starts-with(@text,'用户名')]"  name="locatstring" id="locatstring3" class="required" title="请输入元素定位器" /></div>
+         </div>
+    </div>
+  <div class="form-row">
+            <div class="field-label"><label for="action">操作</label>:</div>
+            <div class="field-widget" >
+                <select id="action" name="action" class="validate-selection"  title="请选择操作类型" onchange="SelChange();">
+                    <option>请选择</option>
+                    <option>输入</option>
+                    <option>点击</option>
+                    <option>滑动-次数</option>
+                    <option>滑动-找到元素</option>
+                    <option>拖拽</option>
+                    <option>手势</option>
+                    <option>晃动</option>
+                </select>
+            </div>
+        </div>
+         
+        
+        
+        <div class="form-row">
+            <div class="field-label"><label for="parlist">参数列表</label>:</div>
+            <div class="field-widget"><textarea id="canshutt" class="optional"  placeholder="参数列表"></textarea></div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="field-label"><label for="asser">判断方式</label>:</div>
+            <div class="field-widget">
+                <select id="asser" name="asser" class="validate-selection"  title="请选择判断方式" >
+                    <option>请选择</option>
+                    <option>是否相同</option>
+                    <option>是否存在</option>
+                    <option>是否为空</option>
+                    <option>是否为真</option>
+                    <option>是否不相同</option>
+                    <option>是否不存在</option>
+                    <option>是否不为空</option>
+                    <option>是否为假</option>
+                </select>
+            </div>
+        </div>
+
+
+           <div class="form-row">
+            <div class="field-label"><label for="expet">预期结果</label>:</div>
+            <div class="field-widget"><input  placeholder="预期结果" name="expet" id="expet" class="required" title="请输入预期结果" /></div>
+           </div>
+
+    </br>
+ 
+    </fieldset>
+
+  <fieldset id="fieldAdd" style="display: none;">
+        <legend>添加功能</legend>
+ 
+
+   <div class="form-row">
+    <!-- 字段名-->
+            <div class="field-label"><label for="eleentcode" >操作步骤</label>:</div>
+  <!-- 字段文本框 是否必填-->
+            <div class="field-widget"><input onchange="checkedstep2();"  name="eleentcode" id="userstep2"  class="required" placeholder="请输入数字" title="请输入用例步骤" /></div>
+        </div>
+
+
+      <!--  <div class="form-row">
+            <div class="field-label"><label for="userstep">操作步骤</label>:</div>
+            <div class="field-label">
+            <input name="userstep2" id="userstep2"  readonly="true" class="optional"  />        
+            </div> -->
+<div class="form-row">
+            <div class="field-label"><label for="action2">操作名称</label>:</div>
+            <div class="field-widget">
+                <select id="action2" name="action2" class="validate-selection" title="请选择操作名称" onchange ="SelChange2();">
+                   <option>请选择</option>
+                    <option>登陆</option>
+                    <option>退出</option>
+                    <option>审批通过</option>
+                    <option>审批拒绝</option>
+                    <option>批审</option>
+                    <option>下拉框</option>
+                    <option>滑动</option>
+                </select>
+            </div>
+
+           <div class="form-row">
+            <div class="field-label"><label for="canshutt2">参数列表</label>:</div>
+            <div class="field-widget"><textarea name="canshutt2" id="canshutt2" class="optional"  placeholder="请输入参数列表"></textarea></div>
+        </div>
+            	
+
+
+        
+     </fieldset>
+
+     <div id="butten" style="display: none;">
+    <input type="button" class="submit" value="提交" onclick="checkdata();"  /> 
+    <input class="reset" type="button" value="重置" onclick="formCallback();" />
+    <input class="back"  type="button" value="返回" onclick="returnlastpage();"/>
+    </div>
+    </form>
+    </div>
+</body>
+</html>

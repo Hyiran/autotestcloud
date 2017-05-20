@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+<title>自动化测试家</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery-1.11.0.js" ></script>
+  <script type="text/javascript" src="js/json2.js" ></script>
+  <script src="../testCase/js/public.js" type="text/javascript"></script>
+ <script type="text/javascript">
+</script> 
+</head>
+<body onload="getUser();GetMenu2();">
+<div class="t">
+  <div class="t_n">
+    <div class="t_nl">
+      <p class="tel">+86-18031694315</p>
+        <p class="mail">jiaxi.fu-klt@pcitc.com</p>
+    </div>
+    <div class="r_nr"><a id ="user" href="#">欢迎您</a> |   <a href="#" onclick="tologin();">退出登陆</a></div>
+  </div>
+</div>
+<div class="top">
+  <div class="logo"><img src="../images/logo.jpg" /></div>
+
+  <div class="search">
+    <!--   <form  method="post" action="/search.asp">
+              <input type="textk" class="textk" name="textfield3" id="textfield3" /> -->
+               <input type="textk" class="textk" name="textfield3" id="textfield3" />
+               <input type="submit" value="" title="注册" class="but" />
+      
+        <!-- </form> -->
+    </div>
+</div>
+<div class="nav">
+<div class="menu1">
+      <ul id="navigation1" >
+
+            <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)" class="nav_w"> <a href="#" class="nav_h1">系统帮助</a>
+          <ul>
+            <li class="nav_w1"><a href="#" onclick="alertPro();" >添加项目</li>
+            <li class="nav_w1"><a href="#">下载手册</a></li>
+         
+          </ul>
+        </li>
+
+
+   <!--      <li  id="xiaoying" style="display: none;"  onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"  > <a  href="#" class="nav_h1">小盈办公</a>
+          <ul >
+             <div>
+            <li  onclick="setProject('xiaoying');" id="xiaoyingtestcase"  style="display: none;" class="nav_w1"><a href="../testCase/testcase.html"  target="_blank">移动端测试用例</a></li>
+            </div>
+
+            <div>
+            <li onclick="setProject('xiaoying');" id="xiaoyingpolicy" style="display: none;"  class="nav_w1"><a href="../testPolicy/testpolicylist.html" target="_blank">移动端执行策略</a></li>
+            </div>
+
+            <div >
+            <li onclick="setProject('xiaoying');" id="xiaoyingreport" style="display: none;"  class="nav_w1"><a href="../testReport/testreport.html" target="_blank" >测试报告</a></li>
+            </div>
+           
+          </ul>
+        </li>
+         -->
+    
+            <li  id="pro0" style="display: none;"  onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"  > <a  id="a0" href="#" class="nav_h1">项目1</a>
+          <ul >
+             <div>
+            <li   class="nav_w1"><a  id="case0"  onclick="setProject2();" href="../testCase/testcase.html"  target="_blank">测试用例</a></li>
+            </div>
+            <div>
+            <li   class="nav_w1"><a   id="policy0"  onclick="setProject2();"href="../testPolicy/testpolicylist.html" target="_blank">执行策略</a></li>
+            </div>
+            <div >
+            <li   class="nav_w1"><a id="report0"   onclick="setProject2();"  href="../testReport/testreport.html" target="_blank" >测试报告</a></li>
+            </div>           
+          </ul>
+        </li>
+        
+              <li  id="pro1" style="display: none;"  onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"  > <a  id="a1" href="#" class="nav_h1">项目2</a>
+          <ul >
+             <div>
+            <li  class="nav_w1"><a  id="case1"  onclick="setProject2();"  href="../testCase/testcase.html"  target="_blank">测试用例</a></li>
+            </div>
+            <div>
+            <li  class="nav_w1"><a id="policy1" onclick="setProject2();"  href="../testPolicy/testpolicylist.html" target="_blank">执行策略</a></li>
+            </div>
+            <div >
+            <li  class="nav_w1"><a  id="report1" onclick="setProject2();"   href="../testReport/testreport.html" target="_blank" >测试报告</a></li>
+            </div>           
+          </ul>
+        </li>
+
+              <li  id="pro2" style="display: none;"  onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"  > <a  id="a2" href="#" class="nav_h1">项目3</a>
+          <ul >
+             <div>
+            <li  class="nav_w1"><a  id="case2"  onclick="setProject2();"  href="../testCase/testcase.html"  target="_blank">测试用例</a></li>
+            </div>
+            <div>
+            <li  class="nav_w1"><a id="policy2" onclick="setProject2();"  href="../testPolicy/testpolicylist.html" target="_blank">执行策略</a></li>
+            </div>
+            <div >
+            <li  class="nav_w1"><a  id="report2" onclick="setProject2();"   href="../testReport/testreport.html" target="_blank" >测试报告</a></li>
+            </div>           
+          </ul>
+        </li>
+
+      <li  id="pro3" style="display: none;"  onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"  > <a  id="a3" href="#" class="nav_h1">项目4</a>
+          <ul >
+             <div>
+            <li  class="nav_w1"><a  id="case3"  onclick="setProject2();"  href="../testCase/testcase.html"  target="_blank">测试用例</a></li>
+            </div>
+            <div>
+            <li  class="nav_w1"><a id="policy3" onclick="setProject2();"  href="../testPolicy/testpolicylist.html" target="_blank">执行策略</a></li>
+            </div>
+            <div >
+            <li  class="nav_w1"><a  id="report3" onclick="setProject2();"   href="../testReport/testreport.html" target="_blank" >测试报告</a></li>
+            </div>           
+          </ul>
+        </li>
+
+        <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)" class="nav_w"> <a href="#" class="nav_h1">测试环境</a>
+          <ul>
+            <li class="nav_w1"><a href="http://10.238.225.13/storeweb/main.html#/_app_list/">应用商店</a></li>
+            <li class="nav_w1"><a href="https://202.96.41.92:9020/cooperWeb/mainapi.html">环境切换</a></li>
+            <li class="nav_w1"><a href="http://10.238.29.151/">员工自助</a></li>
+            <li class="nav_w1"><a href="http://10.238.225.10/">协同平台</a></li>
+            <li class="nav_w1"><a href="http://10.238.103.142/webk/Login.aspx?pass">客户关系</a></li>
+            <li class="nav_w1"><a href="http://10.238.103.142/web/Login.aspx?pass">项目管理</a></li>
+            <li class="nav_w1"><a href="http://10.246.153.7/default.aspx ">合同管理</a></li>
+            <li class="nav_w1"><a href="http://10.238.103.142/web">商务管理</a></li>
+          </ul>
+        </li>
+       
+        <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)" class="nav_w"> <a href="#" class="nav_h1">正式环境</a>
+          <ul>
+             <li class="nav_w1"><a href="https://202.96.41.90/storeweb/main.html#/_user_login">应用商店</a></li>
+            <li class="nav_w1"><a href="http://essp.pcitc.com/">员工自助</a></li>
+            <li class="nav_w1"><a href="http://portal.pcitc.com/Portal/login.aspx?">协同平台</a></li>
+            <li class="nav_w1"><a href="http://10.238.226.46/web/Login.aspx?pass">客户关系</a></li>
+            <li class="nav_w1"><a href="http://10.238.226.46/web/Login.aspx?pass">项目管理</a></li>
+            <li class="nav_w1"><a href="http://10.238.226.50/">合同管理</a></li>
+            <li class="nav_w1"><a href="http://10.238.103.142/web">商务管理</a></li>
+          </ul>
+        </li>
+
+     
+    </div>
+    </div>
+
+    <div style="position:absolute; width:100%; height:68%; z-index:-1">  
+
+        <!-- <iframe id="tq1" src="images/p1.jpg" height="100%" width="100%" frameborder="0"></iframe> -->
+<img id="tq1"  src="images/p1.jpg" height="100%" width="100%"/> 
+        <!-- <iframe  id="tq2" src="images/android1.jpg" width="2" height="2" frameborder="0"></iframe> -->
+        <table>
+        <tr>
+
+        <td> 
+        <div >
+         <button  onclick="fanye('last');"  type="submit" value="" title="上一页" class="butlast" /> 
+          <button onclick="fanye('nest');"   type="submit" value="" title="下一页" class="butnext" />
+             <!--  <button   onclick="fanye('last');" type="button">上一页</button>
+              <button   onclick="fanye('nest');" type="button">下一页</button> -->
+            
+        </td>  
+        </tr>
+         
+        
+        </table>
+        <div>
+       <!--  <button type="button">上一页</button>&nbsp &nbsp
+        <button type="button">下一页</button>
+        <button type="button">上一页</button>&nbsp &nbsp
+        <button type="button">下一页</button> -->
+        </div>
+        <div>
+       
+          </div>
+    </div>
+  <script src="js/nav.js"></script>
+  <script src="js/Jurisdiction.js" type="text/javascript"></script>
+</body>
+
+</html>

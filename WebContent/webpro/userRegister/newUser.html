@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		
+</head>
+<body>
+	<div align="center"  >	
+	<form>	
+			</br>
+			</br>
+			</br>
+			
+			
+			</div>
+				<p style="font-family:Georgia;color:red;font-size:23px;text-align:center">用户注册</p>	
+				</br>
+						</br>
+				<ul class="left-form" >
+					
+					<li align="center">
+						<input type="text" id="userName"  placeholder="登录用户名" onchange="UserInit();" required/>
+						<a href="#" id="showuser" class="icon ticker" style="display: none;" > </a>
+						<div class="clear" > </div>
+					</li> 
+
+					<li align="center">
+						<input type="text" id="trueName"  placeholder="您的姓名" onchange="name2();" required/>
+						<a href="#" id="showuser2" class="icon ticker" style="display: none;" > </a>
+						<div class="clear" > </div>
+					</li> 
+
+					<li>
+						<input type="text"  id="email" placeholder="邮箱地址"  onchange="em();" required/>
+						<a href="#" id="showpss4" class="icon ticker" style="display: none;" > </a>
+						<div class="clear"> </div>
+					</li> 
+					<li>
+						<input type="password"  id="passWord"  placeholder="密码" onchange="password();" required/>
+						<a href="#" id="showpss3" class="icon ticker" style="display: none;" > </a>
+						<div class="clear"> </div>
+					</li> 
+					<li>
+						<input type="password"   id="surepassWord"   placeholder="确认密码" onchange="compart();" required/>
+						<a href="#" id="showpss2" class="icon ticker" style="display: none;"  > </a>
+						<div class="clear"> </div>
+					</li> 
+					<label class="checkbox"><input type="checkbox" name="checkbox" checked="">帮助改善系统功能</label>
+					</br>
+				
+					</br>
+					<div  style="text-align:center"> 
+				  <button align="center" id="commit" type="button" style="background-color:red;text-align:center;font-family:Georgia;color:white;font-size:15px" onclick="submit1();">立即注册</button>      
+					</div>
+					
+				</ul>
+				
+					
+			</form>
+			
+		
+
+         <script src="./js/user.js" type="text/javascript"></script>
+         <script src="./js/jquery-1.11.0.js" type="text/javascript"  ></script>
+	
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- public -->
+    <xmlLib>./config/</xmlLib>
+    <excleLib>Chrome</excleLib>
+    <URL>http://127.0.0.1:4723/wd/hub</URL>
+	<Browser>Chrome</Browser>
+	<AppPath>./File/apps/</AppPath>	
+	<ElementWaitTime>5</ElementWaitTime>
+	<implicitlyWaitTime>2</implicitlyWaitTime>
+	<newCommandTimeout>1000</newCommandTimeout>
+	<ignoreUnimportantViews>true</ignoreUnimportantViews>
+	<!-- android -->
+	<AndroidDeviceName>Samsung Galaxy S5 - 4.4.4 - API 19 - 1080x1920</AndroidDeviceName>
+    <Androidapp>xy.app</Androidapp>
+	<appActivity>cn.cooperative.activity.LoginActivity</appActivity>
+	<appPackage>cn.cooperative</appPackage>
+	<appWaitPackage>cn.cooperative</appWaitPackage>
+	<appWaitActivity>cn.cooperative.activity.LoginActivity</appWaitActivity>
+	<!-- ios -->
+    <bundleld>com.beijingranqi.distribution</bundleld>
+    <calendarFormat>Gregorian</calendarFormat>
+    <locationServicesEnabled>true</locationServicesEnabled>
+    <autoAcceptAlerts>true</autoAcceptAlerts> 
+    <platformVersion>9.3</platformVersion>
+    <platformName>iOS</platformName>
+    <IOSDeviceName>iPhone Simulator</IOSDeviceName>
+    <Iosapp>MobileCooperativeOffice.app</Iosapp>
+	<Page>
+		<Login>PageElement/homepage.yaml</Login>
+	</Page>
+</config>

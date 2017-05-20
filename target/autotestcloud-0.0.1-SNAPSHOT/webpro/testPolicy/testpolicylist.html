@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>测试策略</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- 整体布局-->
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <!-- 页面背景颜色-->
+    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
+    <!-- 新增按钮符号-->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <script src="js/testpolicylist.js" type="text/javascript"></script>
+    <script src="../testCase/js/public.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.0.js" type="text/javascript"></script>
+    
+    <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+
+</script>
+    <!-- Demo page code -->
+
+    <style type="text/css">
+        #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+        .brand { font-family: georgia, serif; }
+        .brand .first {
+            color: #ccc;
+            font-style: italic;
+        }
+        .brand .second {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+   <!-- 日期控件 -->
+    <link rel="stylesheet" type="text/css" href="css/tcal.css" />
+    <script type="text/javascript" src="js/tcal.js"></script>
+
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+  <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).click(function() {
+      $( "#dialog" ).dialog( "open" );
+
+    });
+  });
+  </script>
+
+  </head>
+
+
+
+  <body class="" onload="getscree();getTestPolicyNo();getTestCaseList();">     
+
+  <div id="dialog" title="请编辑模板后上传">
+   <form action="/autotestcloud/FileUpLoad" enctype="multipart/form-data" method="post" >  
+  <input  onchange="checkFile();" id="file" type="file" size="40"  name="upl-file"  > 
+  <button  onclick="#" id="up">  <i class="icon-upload"  ></i>上传</button>
+  </form>
+  </div>
+ 
+
+  <div class="btn-toolbar">
+
+        <button onclick="refesh();" id="new" color="black" class="btn btn-primary"><i class="icon-refresh"></i> 刷新</button>
+        <button onclick="newTestPolicy();" id="new" color="black" class="btn btn-primary"><i class="icon-plus"></i> 新增策略</button>
+        <button onClick="checkGetTestCaseListByString();" class="btn btn-primary"><i class="icon-filter">查询策略</button> 
+     
+        <button  id="opener" class="btn btn-primary"><i class="icon-upload"  ></i>上传策略</button>
+        <button onclick="FileDownLoad();"  class="btn btn-primary"><i class="icon-download-alt"></i>下载模版</button>
+
+        <!-- <button class="btn btn-primary"><i class="icon-road" ></i>查询</button> -->     
+</div>
+
+<div class="well"  >
+   <div >
+   <form class="form-inline" > 
+        <label for="case"   style="color:black" >策略名称：</label><input id="casenames" style="width:150px; height:20px;" type="text" name="name"/>
+      <!--   <label for="case"  style="color:black" >创建用户：</label><input id="addmans" style="width:150px; height:20px;" type="text" name="name"/> -->
+         <label for="case"  style="color:black" >运行日期：</label>
+    <select  id="tos" style="width:90px;" >
+   <option value ="请选择">请选择</option>
+
+  <option value ="="> 等于</option>
+  <option value =">" >大于</option>
+  <option value ="<" >小于</option>
+  </select>
+
+  <input id="lastruntimes" style="width:150px;" type="text" name="date" class="tcal" value="" />
+         <label for="case"  style="color:black" >测试结果：</label >
+         <select id="resaults"  style="width:150px;">
+  <option value ="请选择">请选择</option>
+  <option  value ="成功">成功</option>
+  <option value ="失败">失败</option></select>
+        </form>
+         </div>
+
+    <div id="createtable" class="table"  font size="200"  >
+     </div>
+</div>
+
+
+<div   id="pageInsex" class="pagination"   >
+    <ul>
+        <li onclick="getPage('liTop');"  ><a  id="liTop" href="#" style="background: white;" >首页</a></li>
+        <li  onclick="getPage('li1Last');"><a  id="li1Last" href="#">上一页</a></li>
+        <li  onclick="getPage('li1');" ><a style="display:none;" id="li1" href="#" style="background: white;">1</a></li>
+        <li onclick="getPage('li2');"><a style="display:none;"  id="li2" href="#" style="background: white;">2</a></li>
+        <li onclick="getPage('li3');"><a style="display:none;" id="li3"  href="#" style="background: white;">3</a></li>
+        <li onclick="getPage('li4');"><a style="display:none;" id="li4"  href="#" style="background: white;">4</a></li>
+        <li  onclick="getPage('li5');"><a style="display:none;" id="li5" href="#" style="background: white;">5</a></li>
+        <li  onclick="getPage('li1Next');"><a  id="li1Next" href="#">下一页</a></li>
+        <li  onclick="getPage('liFinal');"><a  id="liFinal" href="#">尾页</a></li>
+    </ul>
+</div>
+
+
+
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">删除策略</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>您确定删除当前策略吗?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-danger" onclick="deleTestCase();" data-dismiss="modal">确认</button>
+    </div>
+
+  
+</div>
+
+
+
+  
+</div>
+
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $("[rel=tooltip]").tooltip();
+        $(function() {
+            $('.demo-cancel-click').click(function(){return false;});
+        });
+    </script>
+  
+  </body>
+</html>
+
+
