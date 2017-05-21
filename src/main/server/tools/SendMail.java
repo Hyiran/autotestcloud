@@ -18,6 +18,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import org.testng.annotations.Test;
+
+import main.funtion.GetIp;
+
 
 /**
  * Title: 使用javamail发送邮件 Description: 演示如何使用javamail包发送电子邮件。这个实例可发送多附件
@@ -265,13 +269,16 @@ public static void main(String[] args) {
  * @param Content   内容
  * @return
  */
-public boolean sendMailToUser(SendMail sendMail,String sendManEmail,String sendManPassword,String receivedManEmail,String Subject,String Content)
+public boolean sendMailToUser( String sendManEmail,String sendManPassword,String receivedManEmail,String Subject,String Content)
 {
 	try {
+
+		SendMail sendMail =new SendMail();
 		sendMail.setHost("smtp.163.com");
 		sendMail.setUserName(sendManEmail);
 		sendMail.setPassWord(sendManPassword);
 		sendMail.setTo(receivedManEmail);
+		sendMail.setFrom(sendManEmail);
 		sendMail.setSubject(Subject);
 		sendMail.setContent(Content);
 		sendMail.sendMail();
@@ -281,5 +288,20 @@ public boolean sendMailToUser(SendMail sendMail,String sendManEmail,String sendM
 		return false;
 	}
 
+}
+
+//@Test
+public void t1()
+{
+
+	
+  	String Subject="自动化测试执行";
+   	GetIp getIp =new GetIp();
+   	String ip=getIp.getMyIp();
+   	String Content="您的自动化测试已经执行完毕，请到测试报告页面查看测试详情。网站地址:http://"+ip+":8081/autotestcloud";
+//	System.out.println();
+    SendMail sendMail =new SendMail();
+   	boolean sendSuccess= sendMail.sendMailToUser( "jurryfu@163.com", "love525131417", "635134117@qq.com", Subject, Content);
+   	
 }
 }

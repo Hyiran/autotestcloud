@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.testng.annotations.Test;
+
 import io.appium.java_client.android.AndroidDriver;
 import main.funtion.ConnectMySQL;
 import main.funtion.DataHandle;
@@ -145,7 +147,7 @@ public class RunTestPolicy extends HttpServlet {
 	       	String ip=getIp.getMyIp();
 	       	String Content="您的自动化测试已经执行完毕，请到测试报告页面查看测试详情。网站地址:http://"+ip+":8081/autotestcloud";
 	        SendMail sendMail =new SendMail();
-	       	boolean sendSuccess= sendMail.sendMailToUser(sendMail, "jurryfu@163.com", "love525131417", receivedManEmail, Subject, Content);
+	       	boolean sendSuccess= sendMail.sendMailToUser( "jurryfu@163.com", "love525131417", receivedManEmail, Subject, Content);
 	       	  if (sendSuccess)
 	       	  {
 	       		tESTLOGString="测试完毕，邮件已发送到您的邮箱，您可以在测试报告页面查看测试结果";
