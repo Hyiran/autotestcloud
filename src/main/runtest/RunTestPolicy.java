@@ -86,6 +86,10 @@ public class RunTestPolicy extends HttpServlet {
 //      	   	如果找到了一条记录(策略存在)
 	      	   	if (rs.size()==1)
 	      	   	{
+//获取运行设备名
+	      	   		String deviceName=rs.get(0).get("deviceName");
+//	      	   			将设备状态改成运行中(1)
+	      	   	mysql.getSqlResault("update  machine set isuse='1'  where machineName ='"+deviceName+"' ", false);   
 //	      	   		删除此条策略历史记录-报告日志 
 	      	   		this.delAlredReport();
 	      	   	try {
@@ -157,6 +161,8 @@ public class RunTestPolicy extends HttpServlet {
 	       		tESTLOGString="测试完毕，请在测试报告页面查看测试结果";
 			  }
 	       	  
+//	       	  修改设备状态
+	         	mysql.getSqlResault("update  machine set isuse='0'  where machineName ='"+deviceName+"' ", false); 
 	       	    stream.write(tESTLOGString.getBytes("UTF-8"));
 		}
 			

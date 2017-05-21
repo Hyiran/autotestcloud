@@ -96,7 +96,7 @@ public class GenExcleReport extends HttpServlet {
       //否则，说明用户没有登录，跳转到登录页面让用户登录
       		else
       		{
-      			 String url = "http://127.0.0.1:8081/autotestcloud/webpro/login/login.html";
+      			 String url = "/autotestcloud/webpro/login/login.html";
       				stream.write(url.getBytes("UTF-8"));
 //      			  response.sendRedirect(url);
       		} 
