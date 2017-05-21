@@ -149,7 +149,7 @@ this.content = content;
 */
 public String transferChinese(String strText) {
 try {
-strText = MimeUtility.encodeText(new String(strText.getBytes(), "GB2312"), "GB2312", "B");
+strText = MimeUtility.encodeText(new String(strText.getBytes(), "UTF-8"), "UTF-8", "B");
 } catch (Exception e) {
 e.printStackTrace();
 }
@@ -243,30 +243,43 @@ public static void main(String[] args) {
 	System.out.println("...");
 	SendMail sendmail = new SendMail();
 	sendmail.setHost("smtp.163.com");// smtp.mail.yahoo.com.cn/smtp.163.com
-	sendmail.setUserName("15023106148@163.com");// 您的邮箱用户名
-	sendmail.setPassWord("a996298643");// 您的邮箱密码
-	sendmail.setTo("996298643@qq.com");// 接收者
-	sendmail.setFrom("15023106148@163.com");// 发送者
-	sendmail.setSubject("this" + Math.random());
-	sendmail.setContent("this, welcome thank you!" + Math.random());
-	// sendmail.attachfile("D:\\config.ini");
+	sendmail.setUserName("jurryfu@163.com");// 您的邮箱用户名
+	sendmail.setPassWord("love525131417");// 您的邮箱密码
+	sendmail.setTo("635134117@qq.com");// 接收者
+	sendmail.setFrom("jurryfu@163.com");// 发送者
+	sendmail.setSubject("测试完成");
+	sendmail.setContent("您的测试完毕，请到测试报告页面查看");
 	sendmail.sendMail();
 	System.out.println("end");
 	
-//	xgcngdkrfupnbeha
-//		System.out.println("...");
-//		SendMail sendmail = new SendMail();
-//		sendmail.setHost("smtp.qq.com");// smtp.mail.yahoo.com.cn/smtp.163.com
-//		sendmail.setUserName("635134117@qq.com");// 您的邮箱用户名
-//		sendmail.setPassWord("xgcngdkrfupnbeha");// 您的邮箱密码
-//		sendmail.setTo("www.fuv1100@163.com");// 接收者
-//		sendmail.setFrom("635134117@qq.com");// 发送者
-////		sendmail.setSubject("this" + Math.random());
-////		sendmail.setContent("this, welcome thank you!" + Math.random());
-//		sendmail.setSubject("自动化测试完成");
-//		sendmail.setContent("您的测试完毕，请到测试报告页面查看");
-//		// sendmail.attachfile("D:\\config.ini");
-//		sendmail.sendMail();
-//		System.out.println("end");
+
+}
+
+/**
+ * 发送邮件
+ * @param sendMail 邮件对象
+ * @param sendManEmail  发件人邮箱地址
+ * @param sendManPassword  发件人邮箱授权码
+ * @param receivedManEmail  收件人邮箱地址
+ * @param Subject    主题
+ * @param Content   内容
+ * @return
+ */
+public boolean sendMailToUser(SendMail sendMail,String sendManEmail,String sendManPassword,String receivedManEmail,String Subject,String Content)
+{
+	try {
+		sendMail.setHost("smtp.163.com");
+		sendMail.setUserName(sendManEmail);
+		sendMail.setPassWord(sendManPassword);
+		sendMail.setTo(receivedManEmail);
+		sendMail.setSubject(Subject);
+		sendMail.setContent(Content);
+		sendMail.sendMail();
+		return true;
+	} catch (Exception e) {
+		// TODO: handle exception
+		return false;
+	}
+
 }
 }

@@ -760,7 +760,7 @@ setCookie("policId",policId);
 var runPolicy=function()
 {
   
-alert("测试运行中，请稍后，运行完毕后会发送测试报告到您邮件中，请查收。");
+alert("测试运行中，请稍后...");
  /* body... */
     $.ajax({
 

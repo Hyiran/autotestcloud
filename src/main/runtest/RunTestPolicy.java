@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import io.appium.java_client.android.AndroidDriver;
 import main.funtion.ConnectMySQL;
 import main.funtion.DataHandle;
+import main.funtion.GetIp;
 import main.funtion.TimeString;
+import main.server.tools.SendMail;
 
 
 /**
@@ -41,6 +43,7 @@ public class RunTestPolicy extends HttpServlet {
 	}
 	  String tetString="";
 	String tESTLOGString="";
+	String user="";
 //	测试开始时间
 	public String  startTestTime;
 //	测试结束时间
@@ -64,7 +67,7 @@ public class RunTestPolicy extends HttpServlet {
          session = request.getSession(false);
 //         获得项目
         project=(String) session.getAttribute("project");
-
+        user=(String) session.getAttribute("userName");
 //        	初始化测试开始时间
         	startTestTime=TimeString.getyMDHMS();
 //        	获取策略数据id值
@@ -134,14 +137,24 @@ public class RunTestPolicy extends HttpServlet {
 	       	    mysql.getSqlResault("insert into report (project,platformName,deviceName,policyName,res,startTime,endTime,useTime)"
    	     		+ "values('"+project+"','"+run.platformName+"','"+run.deviceName+"','"+run.policyName+"','"+resault+"','"+startTestTime+"','"+endTestTime+"',"
    	     				+ "'"+useTime+"')", false);
-	       	    
-	       	    if (tESTLOGString.equals("")) {
-	       	    	tESTLOGString="测试完毕，请在测试报告页面查看测试结果";
-	       	 
-	       	     
-				}
-
-	  
+//	       	    获取收件人邮箱地址
+	       	   rs= mysql.getSqlResault(" select * from user where user ='"+user+"'", true);
+	       	   String receivedManEmail=rs.get(0).get("email");
+	       	String Subject="自动化测试执行"+resault;
+	       	GetIp getIp =new GetIp();
+	       	String ip=getIp.getMyIp();
+	       	String Content="您的自动化测试已经执行完毕，请到测试报告页面查看测试详情。网站地址:http://"+ip+":8081/autotestcloud";
+	        SendMail sendMail =new SendMail();
+	       	boolean sendSuccess= sendMail.sendMailToUser(sendMail, "jurryfu@163.com", "love525131417", receivedManEmail, Subject, Content);
+	       	  if (sendSuccess)
+	       	  {
+	       		tESTLOGString="测试完毕，邮件已发送到您的邮箱，您可以在测试报告页面查看测试结果";
+	       	  }
+	       	  else 
+	       	  {
+	       		tESTLOGString="测试完毕，请在测试报告页面查看测试结果";
+			  }
+	       	  
 	       	    stream.write(tESTLOGString.getBytes("UTF-8"));
 		}
 			
