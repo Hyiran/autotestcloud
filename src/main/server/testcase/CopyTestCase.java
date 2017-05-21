@@ -35,7 +35,7 @@ public class CopyTestCase extends HttpServlet {
 		doPost(request, response);
 	}
 
-	
+   	public int totalNo=0;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//		设置编码  
 		request.setCharacterEncoding("UTF-8");  
@@ -64,12 +64,17 @@ public class CopyTestCase extends HttpServlet {
    	  String oldCasename=request.getParameter("oldCasename");
    	  String newCasename=request.getParameter("newCasename");
    	  String caseStepTable="testcase"+project;
+//   	  记录原用例有多少步
+   	  int oldStepNo=0;
+//   	  新用例加入主表的部数
+
    	  String res="";
    	     try 
    	     {
 //   	    	sqlString="select * from "+caseStepTable +" where casename ='"+oldCasename+"'"+"--";
 //   	    	 原用例是否存在
    	      rs=mysql.getSqlResault("select * from "+caseStepTable +" where casename ='"+oldCasename+"'", true);
+   	   totalNo=rs.size();
    	      if (rs.size()==0)
    	      {
 			res="当前用例不存在";
@@ -79,50 +84,45 @@ public class CopyTestCase extends HttpServlet {
    	      {
    	    	  int size=rs.size();
 //   	    	  新用例是否存在
-			int step=1;
+			 int step=1;
+			
 //sqlString=sqlString+"select * from "+caseStepTable +" where casename ='"+newCasename+"' order by step desc"+"--";
 			 List<HashMap<String, String>>  rs2=mysql.getSqlResault("select * from "+caseStepTable +" where casename ='"+newCasename+"' order by step desc" , true);
+			 totalNo=totalNo+rs2.size();
+			 oldStepNo=rs2.size();
+			  
 			 if (rs2.size()!=0) 
 			 {
-				 int totalNo=rs2.size()+size;
 //				 更新主表
 				 //如果存在获取最大步骤数
-				 String stepString=rs.get(0).get("step");
-				 step=DataHandle.getInt(stepString);
-//sqlString=sqlString+"update testcasemain set updatedate='"+TimeString.getyMDHMS()+"',  updateman='"+user+"'，step="+totalNo+" where casename='"+newCasename+"'"+"--";
-mysql.getSqlResault(" update testcasemain set updatedate='"+TimeString.getyMDHMS()+"',  updateman='"+user+"'，step="+totalNo+" where casename='"+newCasename+"'", false);
 
+mysql.getSqlResault("update testcasemain set updatedate='"+TimeString.getyMDHMS()+"',  updateman='"+user+"',step="+totalNo+" where casename='"+newCasename+"'", false);
+sqlString="update testcasemain set updatedate='"+TimeString.getyMDHMS()+"',  updateman='"+user+"',step="+totalNo+" where casename='"+newCasename+"'";
 			}
 			 else 
 			 {
-//sqlString=sqlString+"insert into testcasemain (project,casename,step,addman,adddate)"+ "values('"+project+"','"+newCasename+"','"+size+"','"+user+"','"+TimeString.getyMDHMS()+"')"+"--";
 //					插入主表
-mysql.getSqlResault("insert into testcasemain (project,casename,step,addman,adddate)"+ "values('"+project+"','"+newCasename+"','"+size+"','"+user+"','"+TimeString.getyMDHMS()+"')", false);
+mysql.getSqlResault("insert into testcasemain (project,casename,step,addman,adddate)"+ "values('"+project+"','"+newCasename+"',"+totalNo+",'"+user+"','"+TimeString.getyMDHMS()+"')", false);
 
-
+sqlString="insert into testcasemain (project,casename,step,addman,adddate)"+ "values('"+project+"','"+newCasename+"',"+totalNo+",'"+user+"','"+TimeString.getyMDHMS()+"')";
 			 }
 //				插入步骤表
 			 for (int i = 0; i < size; i++) 
 			 {
-// sqlString=sqlString+"insert into "+caseStepTable+" (casename,step,elementtype,elementname,weblocatype,weblocatstring,ioslocatype,ioslocatstring,androidlocatype,androidlocatstring,pars,"
-//+ "expet,action,asser,addman,adddate,updatedate)"
-//+ "values('"+rs.get(i).get("casename")+"',"+step+",'"+rs.get(i).get("elementtype")+"','"+rs.get(i).get("elementname")+"','"+rs.get(i).get("weblocatype")+"','"+rs.get(i).get("weblocatstring")+"','"+rs.get(i).get("ioslocatype")+"'"
-//		+ ",'"+rs.get(i).get("ioslocatstring")+"','"+rs.get(i).get("androidlocatype")+"','"+rs.get(i).get("androidlocatstring")+"','"+rs.get(i).get("pars")+"','"+rs.get(i).get("expet")+"',"
-//				+ "'"+rs.get(i).get("action")+"','"+rs.get(i).get("asser")+"','"+rs.get(i).get("addman")+"','"+rs.get(i).get("adddate")+"','"+rs.get(i).get("updatedate")+"')"+"--";
-// 
+
  mysql.getSqlResault("insert into "+caseStepTable+" (casename,step,elementtype,elementname,weblocatype,weblocatstring,ioslocatype,ioslocatstring,androidlocatype,androidlocatstring,pars,"
 + "expet,action,asser,addman,adddate,updatedate)"
-+ "values('"+newCasename+"',"+step+",'"+rs.get(i).get("elementtype")+"','"+rs.get(i).get("elementname")+"','"+rs.get(i).get("weblocatype")+"','"+rs.get(i).get("weblocatstring")+"','"+rs.get(i).get("ioslocatype")+"'"
++ "values('"+newCasename+"',"+oldStepNo+",'"+rs.get(i).get("elementtype")+"','"+rs.get(i).get("elementname")+"','"+rs.get(i).get("weblocatype")+"','"+rs.get(i).get("weblocatstring")+"','"+rs.get(i).get("ioslocatype")+"'"
 		+ ",'"+rs.get(i).get("ioslocatstring")+"','"+rs.get(i).get("androidlocatype")+"','"+rs.get(i).get("androidlocatstring")+"','"+rs.get(i).get("pars")+"','"+rs.get(i).get("expet")+"',"
 				+ "'"+rs.get(i).get("action")+"','"+rs.get(i).get("asser")+"','"+rs.get(i).get("addman")+"','"+rs.get(i).get("adddate")+"','"+rs.get(i).get("updatedate")+"')", false);
- 	step++;
+ oldStepNo++;
 			 }
    	      }
 
 
    	      res="用例复制成功，请刷新页面查看";
-  	      stream.write(res.getBytes("UTF-8"));
-//  	    stream.write(sqlString.getBytes("UTF-8"));
+//  	      stream.write(res.getBytes("UTF-8"));
+  	    stream.write(res.getBytes("UTF-8"));
   	    
    	     }
    	     catch (Exception e)

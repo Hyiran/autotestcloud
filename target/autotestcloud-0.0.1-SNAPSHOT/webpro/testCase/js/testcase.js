@@ -637,7 +637,91 @@ var  getTestCaseList=function()
 
 }
 
+var CopyTestCase=function()
+{
+  var newCasename=document.getElementById("newCase").value;
+  if (newCasename=="")
+   {
+    alert("请输入新用例名称");
+   }
+   else
+   {
+    // alert(newCasename);
+    // 读取缓存中的原用例名称
+    var oldcaseName=getCookie("oldCasename");
+    // alert(oldcaseName);
+     $.ajax({
 
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"/autotestcloud/CopyTestCase",
+            //提交的数据
+            data:{"newCasename":newCasename,"oldCasename":oldcaseName},
+            //返回数据的格式
+            datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
+            //在请求之前调用的函数
+            beforeSend:function()
+            {
+            },
+            //成功返回之后调用的函数             
+            success:function(data)
+            {    
+            } ,
+            //调用执行后调用的函数
+            complete: function(XMLHttpRequest, textStatus)
+            {
+
+                var url=XMLHttpRequest.responseText;
+                // alert(url);
+                if (url =="/autotestcloud/webpro/login/login.html") 
+                {
+                  window.location.href=url;
+
+                }
+                else
+                {
+                               // 获取返回参数
+            var  res= XMLHttpRequest.responseText;
+            alert(res);
+              window.close();
+            // 获取最新数据
+            // refesh();
+         // // 获取最新数据
+         //    genTestCaseToTable();
+                }
+
+            },
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }         
+         });
+
+   }
+}
+
+// 用例复制步骤1，获取原用例名称
+var oldcaseName="";
+var getOldCaseName =function()
+{
+  var policId =event.target.id; 
+
+  // 获取父节点的父节点的id（所在trid）
+  deviceId=document.getElementById(policId).parentNode.parentNode.id;
+  // 获取行号
+  deviceId=deviceId.substring(2,deviceId.length);
+  // 拼接设备id
+  deviceId="casename"+deviceId;
+  // 获取文本
+  oldcaseName=document.getElementById(deviceId).innerHTML;
+  setCookie("oldCasename",oldcaseName);
+
+  // alert(getCookie("oldCasename"));
+  var url="copyTestcase.html";
+ window.open (url,'newwindow','height=200,width=300,top=200,left=450,toolbar=no,menubar=no,scrollbars=no,resizable=no, location=no,status=no') ;
+
+}
 // 是否生成数据了
 var gen="1";
 // 页面生成表格
@@ -693,7 +777,7 @@ $('#table1').remove();
            td=$("<td id=updatedate"+a+">"+data2+ "</td>");
            td.appendTo(tr);
            // <a href=\"#\"<i onclick=\"SetRunTestCaseName();\"  id=mac"+a+"  class=\"icon-play\"></i></a>&nbsp 
-           td=$("<td id=set"+a+">    <a href=\"#\" <i id=lok"+a+" class=\"icon-pencil\" onclick=\"toTestCaseStepPage();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\"  getClickButtenIdNo();\"  id=rem"+a+" class=\"icon-trash\"></i></a></td>");   
+           td=$("<td id=set"+a+">   <a href=\"#\"<i onclick=\"getOldCaseName();\"  id=mac"+a+"  class=\"icon-copy\"></i></a>&nbsp   <a href=\"#\" <i id=lok"+a+" class=\"icon-pencil\" onclick=\"toTestCaseStepPage();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\"  getClickButtenIdNo();\"  id=rem"+a+" class=\"icon-trash\"></i></a></td>");   
            td.appendTo(tr);         
 
 

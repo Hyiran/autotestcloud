@@ -263,57 +263,8 @@ public class ConnectMySQL extends GetClassMethodName {
    {
    
 	 	ConnectMySQL mysql= new ConnectMySQL();
-	 	mysql.connect("localhost:3306/Config", "root", "root");
-//	 	  DataHandle dataHandle=new DataHandle();
-//	     String auth=dataHandle.getRadomString(8);
-//	     String userName="3";
-//	     String passWord="3";
-//	     String email="3";
-//	     mysql.getSqlResault(, false);
-//	    List<HashMap<String, String>> rs =mysql.getSqlResault("update testcase  set step=4, elementtype='功能',elementname='',weblocatype='id',weblocatstring='asdasd',ioslocatype='id',ioslocatstring='阿萨德',androidlocatype='xpath',androidlocatstring='asd',pars='你就爱上动脑筋',expet='',action='退出',asser='',updateman='hah',updatedate='2017-04-09  16:50:18' where id=14",false);
-	 String projectName="projectName";	
-	 String projectCode="projectCode";	
-//	 	List<HashMap<String, String>>   rs=mysql.getSqlResault("CREATE TABLE `testcasemain` (`id` int(20) NOT NULL AUTO_INCREMENT, `casename` varchar(40) DEFAULT '',`step` int(10) DEFAULT '1', `addman` varchar(20) DEFAULT '',`adddate` datetime DEFAULT CURRENT_TIMESTAMP, `updatedate` datetime DEFAULT CURRENT_TIMESTAMP,`updateman` varchar(20) DEFAULT '',`lastruntime` datetime DEFAULT CURRENT_TIMESTAMP, `resault` varchar(10) DEFAULT '', PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8", false);
-	 String user1="admin";	
-//	 mysql.getSqlResault("alter table authorization add "+projectCode+" varchar(2)",false);
-	 
-	 List<HashMap<String, String>>    rs=mysql.getSqlResault("select * from authorization where user='admin'", true);	 
-	 List<HashMap<String, String>>    rs2=mysql.getSqlResault("SHOW columns from authorization ", true);
-//	 System.out.println(rs2s.size());
-	 String json ="[";
-	 for (int i = 2; i < rs2.size(); i++) 
-	 {
-		String col=rs2.get(i).get("COLUMN_NAME");
-		String resString=rs.get(0).get(col);
-		
-		if (resString !=null && resString.equals("1") )
-		{
-			 List<HashMap<String, String>>    rs3=mysql.getSqlResault("select projectName from project where projectCode='"+col+"'", true);
-			String projectName1=rs3.get(0).get("projectName");
-			json=json+"{\"projectName\":\""+projectName1+"\",\"projectCode\":\""+col+"\"}";
-			if (i!=rs2.size()-1)
-			{
-				json=json+",";
-			}
-//	        {"id":"1","tagName":"apple"},  
-//			 System.out.println(col+":"+projectName1);
-//			 System.out.println(col+":"+projectName1);
-		}
-		
-		}
-	 json=json+"]";
-	 System.out.println(json);
-	}
-   
-//	 System.out.println(rs.get(1).get("COLUMN_NAME"));
-	 //	   	   	   rs=mysql.getSqlResault("", true);
-//	   	   String s=rs.get(0).get("count(step)");
-//	 	 String s=rs.get(0).get("count(step)");
-////	    获得指定行指定列数据
-////	 	System.out.println(rs.get(0).get("ESSP_GongShi"));
-////	    获得指定行数据
-//		System.out.println(rs.size());
-	
-   
-	
+	 	mysql.connect("localhost:3306/AutoTest", "root", "root");
+	 	mysql.getSqlResault("update testcasemain set updatedate='2017-05-21  22:00:30',  updateman='管理员',step=11 where casename='test2'", false);	 
+
+   }
 }
