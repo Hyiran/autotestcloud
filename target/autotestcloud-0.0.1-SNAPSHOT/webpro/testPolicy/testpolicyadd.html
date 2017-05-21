@@ -94,7 +94,7 @@
   <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
   <!--[if (gt IE 9)|!(IE)]><!--> 
 
-  <body class="" onload="setFromValue();GetMachineList();getApp();">     
+  <body class="" onload="GetMachineList();getApp();setFromValue();">     
  <!-- <body class="" onload="getApp();">   -->
   <div id="dialog" title="请选择apk或者app文件">
    <form action="/autotestcloud/AppFileUpLoad" enctype="multipart/form-data" method="post" >  
@@ -144,15 +144,15 @@
 <label for="case"  style="color:black"   >安卓设备：</label>
 <select id="deviceName1" onchange="steRule();"> 
   <option style="display: none;"   value ="请选择">请选择</option>
-  <option  style="display: none;"  value ="Samsung Galaxy S5" >Samsung Galaxy S5</option>
-  <option style="display: none;"   value ="Samsung Galaxy Note 3">Samsung Galaxy Note 3</option>
+ <!--  <option  style="display: none;"  value ="Samsung Galaxy S5" >Samsung Galaxy S5</option>
+  <option style="display: none;"   value ="Samsung Galaxy Note 3">Samsung Galaxy Note 3</option> -->
 </select>
 
 <label for="case"  style="color:black"  >苹果机型：</label>
 <select id="deviceName2" onchange="steRule();"> 
   <option value ="请选择">请选择</option>
-  <option  value ="Iphone6">Iphone6</option>
-  <option value ="Iphone6s">Iphone6s</option>
+  <!-- <option  value ="Iphone6">Iphone6</option>
+  <option value ="Iphone6s">Iphone6s</option> -->
 </select>
 
 <label for="case"  style="color:black"  >网页测试：</label>
@@ -167,15 +167,15 @@
 <label for="case"  style="color:black" >安卓版本：</label>
 <select id="plantversion1" onchange="steRule();"> 
   <option value ="请选择">请选择</option>
-  <option  value ="4.4 KitKat (API Level 19)">4.4 KitKat (API Level 19)</option>
-  <option value ="Samsung Galaxy Note 3">5.0 Lollipop (API Level 20)</option>
+  <!-- <option  value ="4.4 KitKat (API Level 19)">4.4 KitKat (API Level 19)</option>
+  <option value ="Samsung Galaxy Note 3">5.0 Lollipop (API Level 20)</option> -->
 </select>
 
 <label for="case"  style="color:black" >苹果版本：</label>
 <select id="plantversion2" onchange="steRule();"> 
   <option value ="请选择">请选择</option>
-  <option  value ="Ios 9.3">Ios 9.3</option>
-  <option value ="Ios 10.3">Ios 10.3</option>
+<!--   <option  value ="Ios 9.3">Ios 9.3</option>
+  <option value ="Ios 10.3">Ios 10.3</option> -->
 </select>
 
 <label for="case"  style="color:black" >测试版本：</label>

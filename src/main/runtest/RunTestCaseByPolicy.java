@@ -329,6 +329,9 @@ String  androidappPackage="";
 //			    	 对象为功能的处理方式
 		    	  else 
 		    	  {
+		    		  sqlLog.infor("功能名称："+actionName, runingCase);
+//			    		执行操作
+			    		 isStop=runPolicy.runAction(androidDriver, action, actionName, pars, element);	
 //		    		  	没有创建driver
 		    	  }
 		    	  

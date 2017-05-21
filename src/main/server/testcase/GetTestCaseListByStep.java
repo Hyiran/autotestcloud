@@ -60,7 +60,7 @@ public class GetTestCaseListByStep extends HttpServlet {
 //   	  String   casename;
    	 String   casename =request.getParameter("casename");
 //   	     casename="费用报销查询";
-   	     rs=mysql.getSqlResault("select * from "+caseStepTable+" where casename ='"+casename+"'  and project='"+project+"' order by step  asc ", true);
+   	     rs=mysql.getSqlResault("select * from "+caseStepTable+" where casename ='"+casename+"'  order by step  asc ", true);
    	     
    	     String json=DataHandle.getJosnObjectArry(rs);
  		 stream.write(json.getBytes("UTF-8"));	

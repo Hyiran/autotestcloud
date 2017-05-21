@@ -253,20 +253,12 @@ var steRule =function()
      document.getElementById("plantversion3").selectedIndex=0;     
 
      var va= document.getElementById("deviceName1");
+     // 获取设备名称选择的选项
      var index=document.getElementById("deviceName1").selectedIndex;
-      va=va.options[index].value;
-     // alert(va);
-
-     if (va=="Samsung Galaxy S5" )
-      {
-         document.getElementById('plantversion1').disabled=true;
-        document.getElementById("plantversion1").selectedIndex=1;
-      }
-      if (va=="Samsung Galaxy Note 3")
-       {
-         document.getElementById('plantversion1').disabled=true;
-        document.getElementById("plantversion1").selectedIndex=2;
-       }
+     // 同步版本并设备不可读
+    document.getElementById('plantversion1').disabled=true;
+    document.getElementById("plantversion1").selectedIndex=index;
+    
 
   }
 
@@ -318,9 +310,9 @@ var setFromValue=function()
                     json2=JSON.parse(j);
                  for(var o in json2)
                  { 
-              DataId=json2[o].id;
-              caseName=json2[o].caseName;  
-              timeout=json2[o].timeout;  
+                    DataId=json2[o].id;
+                    caseName=json2[o].caseName;  
+                    timeout=json2[o].timeout;  
                     platformName=json2[o].platformName;  
                     policyName=json2[o].policyName;  
                     deviceName=json2[o].deviceName;  
@@ -344,6 +336,42 @@ var setFromValue=function()
 
                    if (platformName=="Android")
                     {
+
+
+                      // 获得设备下拉框对象
+                     var select= document.getElementById("deviceName1");
+                      for (var i = 0; i <select.options.length; i++) 
+                      {
+                        var value=select.options[i].innerHTML;
+                        if (value==deviceName)
+                         {
+                         select.options[i].selected = true;
+                         break;
+                         }
+                      }
+                      // 获取版本
+                       var select= document.getElementById("plantversion1");
+                      for (var i = 0; i <select.options.length; i++) 
+                      {
+                        var value=select.options[i].innerHTML;
+                        if (value==plantversion)
+                         {
+                         select.options[i].selected = true;
+                         break;
+                         }
+                      }
+
+                       // 获取文件名
+                       var select= document.getElementById("filename1");
+                      for (var i = 0; i <select.options.length; i++) 
+                      {
+                        var value=select.options[i].innerHTML;
+                        if (value==filename)
+                         {
+                         select.options[i].selected = true;
+                         break;
+                         }
+                      }
                        document.getElementById("platformName").selectedIndex=1;
                        document.getElementById("filename1").value=filename;
                        document.getElementById("androidappActivity").value=androidappActivity;
@@ -351,14 +379,37 @@ var setFromValue=function()
                     }
                     else if (platformName=="Ios") 
                     {
+                          // 获得设备下拉框对象
+                     var select= document.getElementById("deviceName2");
+                      for (var i = 0; i <select.options.length; i++) 
+                      {
+                        var value=select.options[i].innerHTML;
+                        if (value==deviceName)
+                         {
+                         select.options[i].selected = true;
+                         break;
+                         }
+                      }
+                      // 获取版本
+                       var select= document.getElementById("plantversion2");
+                      for (var i = 0; i <select.options.length; i++) 
+                      {
+                        var value=select.options[i].innerHTML;
+                        if (value==plantversion)
+                         {
+                         select.options[i].selected = true;
+                         break;
+                         }
+                      }
+
                       document.getElementById("platformName").selectedIndex=2;
                       document.getElementById("filename2").value=filename;
                       document.getElementById("iosbundleid").value=iosbundleid;
                     }
                     else
                     {
-              document.getElementById("platformName").selectedIndex=3;
-              document.getElementById("weblogin").value=weblogin;
+                      document.getElementById("platformName").selectedIndex=3;
+                      document.getElementById("weblogin").value=weblogin;
               
                     }
 
@@ -580,7 +631,7 @@ var  al="1";
 
 
 }
-// 获取列表
+// 获取设备列表列表
 var GetMachineList=function(plantform)
 {
   
@@ -590,9 +641,9 @@ var GetMachineList=function(plantform)
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:"/autotestcloud/GetMachineList",
+            url:"/autotestcloud/GetTestMachineList",
             //提交的数据
-            data:{"plantform":"Android"},
+            data:{"plantform":""},
             //返回数据的格式
             datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
             //在请求之前调用的函数
@@ -616,42 +667,41 @@ var GetMachineList=function(plantform)
                 }
                 else
                 {
-                  // 获取返回json
+                
                 var j=url;  
-                    // alert(json2);
-                    json2=JSON.parse(j);
+                json2=JSON.parse(j);
                   
-                  // 遍历
+                  var index=1;
+                  var  androidDevice=document.getElementById("deviceName1");
+                  var  androidPlant=document.getElementById("plantversion1");
+                  var  iosDevice=document.getElementById("deviceName2");
+                  var  iosPlant=document.getElementById("plantversion2");
              for(var o in json2)
                  { 
-                  // 安卓平台
-                  var plant=json2[o].plantform;
-                  if (plant=="android") 
-                  {
-                   
-                    // 设备1
-                    var isuse=json2[o].isuse;
-                    var name=json2[o].machineName;
-                    if (isuse=="0" && name=="Samsung Galaxy S5") 
+
+                  var plantform=json2[o].plantform;
+                    if (plantform=="android") 
                     {
-                       // alert("11");
-                      document.getElementById("deviceName1").options[1].style="display: block;"; 
-               //        var submenu=document.getElementsByTagName("ul")[0]; 
-                    // submenu.style.display="block"; 
+                        var  device=json2[o].machineName;
+                        var  version=json2[o].version;
+                        androidDevice.options.add(new Option(device,device));
+                        androidPlant.options.add(new Option(version,version));
+                            
                     }
-                    // 设备2
-                    if (isuse=="0" && name=="Samsung Galaxy Note 3") 
+                    else
                     {
-                        // alert("12");
-                      document.getElementById("deviceName1").options[2].style="display: block;"; 
-               //        var submenu=document.getElementsByTagName("ul")[0]; 
-                    // submenu.style.display="block"; 
+                        var  device=json2[o].machineName;
+                        var  version=json2[o].version;
+                        iosDevice.options.add(new Option(device,device));
+                        iosPlant.options.add(new Option(version,version));
                     }
-                  
-                  }
+                 
+              
                 
+                  
+                }
+
               } 
-                } 
             },
             //调用出错执行的函数
             error: function(){

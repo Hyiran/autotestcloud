@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="9135" started-at="2017-05-20T14:28:28Z" finished-at="2017-05-20T14:28:37Z">
+  <suite name="Default suite" duration-ms="652" started-at="2017-05-21T06:46:44Z" finished-at="2017-05-21T06:46:45Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="9135" started-at="2017-05-20T14:28:28Z" finished-at="2017-05-20T14:28:37Z">
-      <class name="main.runtest.RunTestCaseByPolicy">
-        <test-method status="PASS" signature="t2()[pri:0, instance:main.runtest.RunTestCaseByPolicy@49fc609f]" name="t2" duration-ms="9115" started-at="2017-05-20T22:28:28Z" finished-at="2017-05-20T22:28:37Z">
+    <test name="Default test" duration-ms="652" started-at="2017-05-21T06:46:44Z" finished-at="2017-05-21T06:46:45Z">
+      <class name="main.server.tools.SendMail">
+        <test-method status="PASS" signature="t1()[pri:0, instance:main.server.tools.SendMail@5ce81285]" name="t1" duration-ms="630" started-at="2017-05-21T14:46:44Z" finished-at="2017-05-21T14:46:45Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- t2 -->
-      </class> <!-- main.runtest.RunTestCaseByPolicy -->
+        </test-method> <!-- t1 -->
+      </class> <!-- main.server.tools.SendMail -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

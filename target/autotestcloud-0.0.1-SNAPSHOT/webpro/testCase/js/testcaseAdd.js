@@ -4,11 +4,12 @@ var getPar2=function()
       
              if(selVal==1)
             {
-                document.getElementById("parsfuntion").value="{\"elemntspar\": [{\"user\": \"用户名\",\"password\": \"密码\", \"commit\":\"是否点击登陆\"}]}";
+              document.getElementById("parsfuntion").value="{ \"time\":\"休眠时间（毫秒）\"}";
+                // document.getElementById("parsfuntion").value="{\"elemntspar\": [{\"user\": \"用户名\",\"password\": \"密码\", \"commit\":\"是否点击登陆\"}]}";
             }
             else if(selVal==2)
             {
-                document.getElementById("parsfuntion").value="{\"elemntspar\": [{\"allow\": \"是否点击通过\",\"infor\": \"审批信息\"}]}";
+                // document.getElementById("parsfuntion").value="{\"elemntspar\": [{\"allow\": \"是否点击通过\",\"infor\": \"审批信息\"}]}";
                
             }
 }

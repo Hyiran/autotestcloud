@@ -1,5 +1,6 @@
 package main.funtion;
 
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -59,6 +60,21 @@ public class RunPolicy
 				run=false;
 			}
 			
+			return run;
+		}
+		
+		else if (actionName.equals("线程休眠")) 
+		{
+			try {
+				String time=(String) zr1.getValue("/time");
+				System.out.println("休眠时间："+time);
+				int timeInt=DataHandle.getInt(time);	
+				Thread.sleep(timeInt);
+			} catch (Exception e) {
+				// TODO: handle exception
+				run=false;
+			}
+		
 			return run;
 		}
 		else {

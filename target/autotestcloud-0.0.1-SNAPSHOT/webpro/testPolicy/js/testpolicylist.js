@@ -656,22 +656,22 @@ $('#table1').remove();
            var td=$("<td id=id"+a+">"+(i+1)+ "</td>");
            td.appendTo(tr );
          
-           td=$("<td    id=casename"+a+"  value=\"ok\" align=\"center\">"+platformName[i]+ "</td>");
+           td=$("<td    id=platformName"+a+"  value=\"ok\" align=\"center\">"+platformName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=step"+a+"  align=\"center\">"+policyName[i]+ "</td>");
+           td=$("<td id=policyName"+a+"  align=\"center\">"+policyName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=lastruntime"+a+">"+deviceName[i]+ "</td>");
+           td=$("<td id=deviceName"+a+">"+deviceName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=resault"+a+">"+res[i]+ "</td>");
+           td=$("<td id=res"+a+">"+res[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=addman"+a+">"+project[i]+ "</td>");
+           td=$("<td id=project"+a+">"+project[i]+ "</td>");
            td.appendTo(tr);
            td=$("<td id=caseName"+a+">"+caseName[i]+ "</td>");
            td.appendTo(tr);
            
            var aa=id[i];
            // alert(aa);
-           td=$("<td id=set"+a+"> <a href=\"#\"<i  id="+aa+ " onclick=\"setPolicyId();runPolicy();\" class=\"icon-play\"></i></a>&nbsp    <a href=\"#\" <i  id="+aa+ " class=\"icon-pencil\" onclick=\"setPolicyId();toTestPolicyEdit();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\" setPolicyId();\"  id="+aa+ " class=\"icon-trash\"></i></a></td>");   
+           td=$("<td id=set"+a+"> <a href=\"#\"<i  id="+aa+ " onclick=\"setPolicyId();GetMachineIsUse();\" class=\"icon-play\"></i></a>&nbsp    <a href=\"#\" <i  id="+aa+ " class=\"icon-pencil\" onclick=\"setPolicyId();toTestPolicyEdit();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\" setPolicyId();\"  id="+aa+ " class=\"icon-trash\"></i></a></td>");   
            td.appendTo(tr);         
 
 
@@ -741,26 +741,79 @@ var toTestPolicyEdit =function()
     newTestPolicy();
 }
 
+// 运行的策略中的设备名
+var deviceName1="";
 var policId="";
 var setPolicyId=function()
 
 {
-
-
-policId =event.target.id; 
+ policId =event.target.id; 
+// alert(policId);
 setCookie("policId",policId);
+// 获取父节点的父节点的id（所在trid）
+deviceId=document.getElementById(policId).parentNode.parentNode.id;
+// 获取行号
+deviceId=deviceId.substring(2,deviceId.length);
+// 拼接设备id
+deviceId="deviceName"+deviceId;
+// 获取文本
+deviceName1=document.getElementById(deviceId).innerHTML;
+// alert(deviceName1);
 // alert(policId);
 
 // // deleTestCase(policId);
 // alert(getCookie("policId"));
 //    console.log(a);
 }
-
-
-var runPolicy=function()
+// 判断运行设备是否在空闲中
+var GetMachineIsUse=function()
 {
   
-alert("测试运行中，请稍后...");
+ $.ajax({
+
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"/autotestcloud/GetMachineIsUse",
+            //提交的数据
+            data:{"machineName":deviceName1},
+            //返回数据的格式
+            datatype: "jsonp",//"xml", "html", "script", "json", "jsonp", "text".
+            //在请求之前调用的函数
+            beforeSend:function()
+            {
+            },
+            //成功返回之后调用的函数             
+            success:function(data)
+            {    
+            } ,
+            //调用执行后调用的函数
+            complete: function(XMLHttpRequest, textStatus)
+            {
+
+                var url=XMLHttpRequest.responseText;
+                
+                if (url =="设备使用中") 
+                {
+                 alert("设备："+deviceName1+",正在运行中! 请更换测试设备或者稍后重试")
+
+                }
+                else
+                {
+                  runPolicy();
+                }
+
+            },
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }         
+         });
+}
+var runPolicy=function()
+{
+    // alert("策略编号："+policId); 
+    alert("测试运行中，请稍后...");
  /* body... */
     $.ajax({
 
@@ -769,6 +822,7 @@ alert("测试运行中，请稍后...");
             //提交的网址
             url:"/autotestcloud/RunTestPolicy",
             //提交的数据
+       
             data:{"id":policId},
             //返回数据的格式
             datatype: "jsonp",//"xml", "html", "script", "json", "jsonp", "text".
@@ -793,14 +847,9 @@ alert("测试运行中，请稍后...");
                 }
                 else
                 {
-
-                               // 获取返回参数
-            // var  res= XMLHttpRequest.responseText;
-            // alert(res);
-            // 获取最新数据
-            refesh();
-         // 获取最新数据
-            genTestCaseToTable();
+                  refesh();
+               // 获取最新数据
+                  genTestCaseToTable();
                 }
 
             },
@@ -1040,22 +1089,22 @@ var GetTestCaseListByString =function()
            var td=$("<td id=id"+a+">"+(i+1)+ "</td>");
            td.appendTo(tr );
          
-           td=$("<td    id=casename"+a+"  value=\"ok\" align=\"center\">"+platformName[i]+ "</td>");
+           td=$("<td    id=platformName"+a+"  value=\"ok\" align=\"center\">"+platformName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=step"+a+"  align=\"center\">"+policyName[i]+ "</td>");
+           td=$("<td id=policyName"+a+"  align=\"center\">"+policyName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=lastruntime"+a+">"+deviceName[i]+ "</td>");
+           td=$("<td id=deviceName"+a+">"+deviceName[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=resault"+a+">"+res[i]+ "</td>");
+           td=$("<td id=res"+a+">"+res[i]+ "</td>");
            td.appendTo(tr);
-           td=$("<td id=addman"+a+">"+project[i]+ "</td>");
+           td=$("<td id=project"+a+">"+project[i]+ "</td>");
            td.appendTo(tr);
            td=$("<td id=caseName"+a+">"+caseName[i]+ "</td>");
            td.appendTo(tr);
            
            var aa=id[i];
            // alert(aa);
-           td=$("<td id=set"+a+"> <a href=\"#\"<i  id="+aa+ " onclick=\"setPolicyId();runPolicy();\" class=\"icon-play\"></i></a>&nbsp    <a href=\"#\" <i  id="+aa+ " class=\"icon-pencil\" onclick=\"setPolicyId();toTestPolicyEdit();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\" setPolicyId();\"  id="+aa+ " class=\"icon-trash\"></i></a></td>");   
+           td=$("<td id=set"+a+"> <a href=\"#\"<i  id="+aa+ " onclick=\"setPolicyId();GetMachineIsUse();\" class=\"icon-play\"></i></a>&nbsp    <a href=\"#\" <i  id="+aa+ " class=\"icon-pencil\" onclick=\"setPolicyId();toTestPolicyEdit();\" ></i></a>&nbsp     <a href=\"#myModal\" role=\"button\" data-toggle=\"modal\"><i  onclick=\" setPolicyId();\"  id="+aa+ " class=\"icon-trash\"></i></a></td>");   
            td.appendTo(tr);         
 
 
